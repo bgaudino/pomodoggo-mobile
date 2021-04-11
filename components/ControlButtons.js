@@ -19,7 +19,7 @@ export const ControlButtons = props => {
 
 const styles = StyleSheet.create({
     button: {
-      width: 135, 
+      width: 120, 
       borderWidth: 1, 
       borderColor: 'white',
       alignItems: 'center',

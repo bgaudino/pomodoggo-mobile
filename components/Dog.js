@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         padding: 10,
       },
     dog: {
-      height: 300,
-      width: 300,
+      height: 250,
+      width: 340,
       borderRadius: 20,
       borderWidth: 4,
       borderColor:  'white',

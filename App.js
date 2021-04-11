@@ -3,6 +3,11 @@ import { Text, View, StyleSheet, Image, Vibration, TouchableOpacity} from 'react
 import Constants from 'expo-constants';
 import { Sound } from 'expo-av/build/Audio';
 
+import { Dog } from './components/Dog';
+import { WorkButtons } from './components/WorkButtons';
+import { BreakButtons } from './components/BreakButtons';
+import { ControlButtons } from './components/ControlButtons';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -190,50 +195,12 @@ export default class App extends React.Component {
 
     return (
       <View style={appStyle}>
-        <Text style={styles.title}>
-          &#128054; pomoDoggo
-        </Text>
-        <Text style={styles.timer}>
-          {timeLeft}
-        </Text>
-        <Text style={styles.text}>{message}</Text>
-        <View style={styles.container}>
-          <Image style={styles.dog} source={{uri: this.state.dog}} ImageSource='./assets/marylois.jpg' />
-        </View>
-        <Text style={[styles.text, {marginBottom: 20}]}>{this.state.breed}</Text>
-        <View style={styles.buttonGroup}>
-          <Text style={styles.text}>Work length - {this.state.session} min</Text>
-          <View style={[styles.buttonGroup, {justifySelf: 'flex-end'}]}>
-            <TouchableOpacity style={styles.button} onPress={sessionDec}>
-              <Text style={styles.text}>-</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={sessionInc}>
-              <Text style={styles.text}>+</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.buttonGroup}>
-          <Text style={styles.text}>Break length - {this.state.break} min</Text>
-          <View style={styles.buttonGroup}>
-            <TouchableOpacity style={styles.button} onPress={breakDec}>
-              <Text style={styles.text}>-</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={breakDec}>
-              <Text style={styles.text}>+</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <TouchableOpacity style={[styles.container, {backgroundColor: btnColor, width: 135, borderWidth: 1, borderColor: 'white'}]} onPress={startStop}>
-            <Text style={styles.text}>{btnText}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.container, {backgroundColor: '#259aff', width: 135, borderWidth: 1, borderColor: 'white'}]} onPress={getDog}>
-            <Text style={styles.text}>Fetch 🦴</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.container, {backgroundColor: '#281510', width: 135, borderWidth: 1, borderColor: 'white'}]} onPress={reset}>
-            <Text style={styles.text}>Reset</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.title}>&#128054; pomoDoggo</Text>
+        <Text style={styles.timer}>{timeLeft}</Text>
+        <Dog source={this.state.dog} message={message} breed={this.state.breed}/>
+        <WorkButtons session={this.state.session} inc={sessionInc} dec={sessionDec} />
+        <BreakButtons break={this.state.break} inc={breakInc} dec={breakDec} />
+        <ControlButtons btnText={btnText} btnColor={btnColor} toggleStart={startStop} reset={reset} getDog={getDog}/>
       </View>
     );
   }
@@ -241,34 +208,6 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  buttonGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 5
-  },
-  button: {
-    backgroundColor: '#281510',
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    borderColor: 'white',
-    borderWidth: 1,
-    justifyContent: 'center',
-    marginLeft: 10
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-  dog: {
-    height: 300,
-    width: 300,
-    borderRadius: 20,
-    borderWidth: 4,
-    borderColor:  'white',
-  },
   timer: {
     fontSize: 96,
     fontFamily: 'Courier',
@@ -280,11 +219,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Marker Felt',
     textAlign: 'center',
     color: 'white'
-  },
-  text: {
-    color: 'white',
-    textAlign: 'center',
-    fontFamily: 'Marker Felt',
-    fontSize: 20
   }
 });

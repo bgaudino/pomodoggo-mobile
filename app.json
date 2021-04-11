@@ -4,7 +4,7 @@
     "slug": "pomodoggo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/marylois.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A pomodoro timer that also fetches random dog photos.",
+    "githubUrl": "https://github.com/bgaudino/pomodoggo-mobile.git"
   }
 }
